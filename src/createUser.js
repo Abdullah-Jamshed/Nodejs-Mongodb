@@ -11,6 +11,7 @@ const createUser = (name, res) => {
   //     res.send(message);
   //   });
 
+  
   //// insertOne User
   const user = new UserModel({ name });
   UserModel.create(user) //// equivalent to insertOne
