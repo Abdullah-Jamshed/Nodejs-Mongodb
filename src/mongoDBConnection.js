@@ -5,7 +5,7 @@ const path = require("path");
 require("dotenv").config({ path: "../.env" });
 
 // modules
-const getUser = require("./readUser");
+const { getUser, getUsers } = require("./readUser");
 const createUser = require("./createUser");
 
 const app = express();
@@ -31,8 +31,18 @@ mongoose.connection
   });
 
 app.get("/users", async (req, res) => {
-  const users = await getUser();
+  const users = await getUsers(); // all users
   res.json(users);
+});
+
+app.get("/user/:name", async (req, res) => {
+  const name = req.params.name;
+  if (name) {
+    const user = await getUser(name); // seleted user
+    res.json(user);
+    return;
+  }
+  res.send("Some Thing Went Wrong");
 });
 
 app.post("/createUser", async (req, res) => {
@@ -41,6 +51,10 @@ app.post("/createUser", async (req, res) => {
     createUser(name, res);
   }
   res.send("SomeThing Went Wrong");
+});
+
+app.get("*", (req, res) => {
+  res.status(404).send("<h1>404 ERROR PAGE NOT FOUND</h1>");
 });
 
 app.listen(app.get("port"), function () {
