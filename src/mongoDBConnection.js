@@ -22,13 +22,13 @@ mongoose.connect(`mongodb+srv://${USER_ID}:${USER_PASSWORD}@cluster0.ekurl.mongo
   useNewUrlParser: true,
 });
 
-// mongoose.connection
-//   .once("open", () => {
-//     console.log("<<<<<======== Connection is Established....========>>>>>>>>");
-//   })
-//   .on("error", (err) => {
-//     console.log("Err: ", err);
-//   });
+mongoose.connection
+  .once("open", () => {
+    console.log("<<<<<======== Connection is Established....========>>>>>>>>");
+  })
+  .on("error", (err) => {
+    console.log("Err: ", err);
+  });
 
 app.get("/users", async (req, res) => {
   const users = await getUser();
