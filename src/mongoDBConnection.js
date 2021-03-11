@@ -4,7 +4,7 @@ const path = require("path");
 require("dotenv").config({ path: "../.env" });
 
 // modules
-const { getUser, getUsers } = require("./readUser");
+const { getUser, getUsers, getUserID } = require("./readUser");
 const createUser = require("./createUser");
 const { updateUser, updateUserID } = require("./updateUser");
 
@@ -45,6 +45,19 @@ app.get("/user/:name", async (req, res) => {
   res.send("Some Thing Went Wrong");
 });
 
+app.get("/userID/:id", async (req, res) => {
+  const id = req.params.id;
+  if (id) {
+    const user = await getUserID(id); // seleted user by id
+    if (user) {
+      res.json(user);
+      return;
+    }
+    res.send("Some Thing Went Wrong");
+  }
+  res.send("Some Thing Went Wrong");
+});
+
 app.post("/createUser", async (req, res) => {
   const name = req.body.name;
   if (name) {
@@ -61,6 +74,7 @@ app.put("/updateUser/:name", (req, res) => {
   }
   res.send("SomeThing Went Wrong");
 });
+
 app.put("/updateUserID/:id", (req, res) => {
   const id = req.params.id;
   const name = req.body.name;

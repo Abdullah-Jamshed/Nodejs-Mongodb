@@ -24,8 +24,7 @@ const updateUser = (name, findName, res) => {
   //   .catch((err) => res.send("Something Went Wrong"));
   //  <<<<<===============>>>>>>
   // Update one only with same value
-  // UserModel.findOneAndUpdate({ name: findName }, { name })
-  UserModel.findOneAndUpdate({ age: 20 }, { name: "ahmed" })
+  UserModel.findOneAndUpdate({ name: findName }, { name }) // can match with any field But Update only Scema fields
     .then(() => res.send("User Update A"))
     .catch((err) => res.send("Something Went Wrong"));
 };
