@@ -8,7 +8,7 @@ const createUser = require("./createUser");
 const { getUser, getUsers, getUserID } = require("./readUser");
 const { updateUser, updateUserID } = require("./updateUser");
 const { deleteUser, deleteUserID } = require("./deleteUser");
-const findUser = require("./operators");
+const { findUser, pagination } = require("./operators");
 
 const app = express();
 app.use(express.json());
@@ -101,6 +101,10 @@ app.get("/findUser", async (req, res) => {
   const data = await findUser();
   if (data) return res.json(data);
   res.send("Something Went Wrong");
+});
+
+app.get("/page/:no", async (req, res) => {
+  pagination(req.params.no, res);
 });
 
 app.get("*", (req, res) => {
