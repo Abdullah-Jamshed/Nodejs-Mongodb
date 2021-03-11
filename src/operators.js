@@ -27,6 +27,7 @@ const findUser = async () => {
     return false;
   }
 };
+
 const pagination = async (pageNum, res) => {
   var itemsPerPage = 4;
   const count = await UserModel.count();
@@ -41,3 +42,4 @@ const pagination = async (pageNum, res) => {
 };
 
 module.exports = { findUser, pagination };
+
