@@ -4,9 +4,10 @@ const path = require("path");
 require("dotenv").config({ path: "../.env" });
 
 // modules
-const { getUser, getUsers, getUserID } = require("./readUser");
 const createUser = require("./createUser");
+const { getUser, getUsers, getUserID } = require("./readUser");
 const { updateUser, updateUserID } = require("./updateUser");
+const { deleteUser, deleteUserID } = require("./deleteUser");
 
 const app = express();
 app.use(express.json());
@@ -30,6 +31,16 @@ mongoose.connection
     console.log("Err: ", err);
   });
 
+// <<<<==== CRUD OPERATIONS ====>>>>
+
+// <<<<==== Create ====>>>>
+app.post("/createUser", async (req, res) => {
+  const name = req.body.name;
+  if (name) return createUser(name, res);
+  res.send("SomeThing Went Wrong");
+});
+
+// <<<<==== READ ====>>>>
 app.get("/users", async (req, res) => {
   const users = await getUsers(); // all users
   res.json(users);
@@ -49,39 +60,38 @@ app.get("/userID/:id", async (req, res) => {
   const id = req.params.id;
   if (id) {
     const user = await getUserID(id); // seleted user by id
-    if (user) {
-      res.json(user);
-      return;
-    }
+    if (user) return res.json(user);
     res.send("Some Thing Went Wrong");
   }
   res.send("Some Thing Went Wrong");
 });
 
-app.post("/createUser", async (req, res) => {
-  const name = req.body.name;
-  if (name) {
-    createUser(name, res);
-  }
-  res.send("SomeThing Went Wrong");
-});
-
+// <<<<==== UPDATE ====>>>>
 app.put("/updateUser/:name", (req, res) => {
   const findName = req.params.name;
   const name = req.body.name;
-  if (name) {
-    return updateUser(name, findName, res);
-  }
+  if (name) return updateUser(name, findName, res);
   res.send("SomeThing Went Wrong");
 });
 
 app.put("/updateUserID/:id", (req, res) => {
   const id = req.params.id;
   const name = req.body.name;
-  if (name) {
-    updateUserID(name, id, res);
-    return;
-  }
+  if (name) return updateUserID(name, id, res);
+  res.send("SomeThing Went Wrong");
+});
+
+// <<<<==== DELETE ====>>>>
+
+app.delete("/deleteUser", (req, res) => {
+  const { name } = req.body;
+  if (name) return deleteUser(name, res);
+  res.send("SomeThing Went Wrong");
+});
+
+app.delete("/deleteUserID/:id", (req, res) => {
+  const { id } = req.params;
+  if (id) return deleteUserID(id, res);
   res.send("SomeThing Went Wrong");
 });
 
