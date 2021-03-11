@@ -34,10 +34,9 @@ mongoose.connection
 // <<<<==== CRUD OPERATIONS ====>>>>
 
 // <<<<==== Create ====>>>>
-app.post("/createUser", async (req, res) => {
+app.post("/createUser", (req, res) => {
   const name = req.body.name;
-  if (name) return createUser(name, res);
-  res.send("SomeThing Went Wrong");
+  createUser(name, res);
 });
 
 // <<<<==== READ ====>>>>
