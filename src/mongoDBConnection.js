@@ -1,4 +1,3 @@
-const { json } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -7,6 +6,7 @@ require("dotenv").config({ path: "../.env" });
 // modules
 const { getUser, getUsers } = require("./readUser");
 const createUser = require("./createUser");
+const { updateUser, updateUserID } = require("./updateUser");
 
 const app = express();
 app.use(express.json());
@@ -49,6 +49,24 @@ app.post("/createUser", async (req, res) => {
   const name = req.body.name;
   if (name) {
     createUser(name, res);
+  }
+  res.send("SomeThing Went Wrong");
+});
+
+app.put("/updateUser/:name", (req, res) => {
+  const findName = req.params.name;
+  const name = req.body.name;
+  if (name) {
+    return updateUser(name, findName, res);
+  }
+  res.send("SomeThing Went Wrong");
+});
+app.put("/updateUserID/:id", (req, res) => {
+  const id = req.params.id;
+  const name = req.body.name;
+  if (name) {
+    updateUserID(name, id, res);
+    return;
   }
   res.send("SomeThing Went Wrong");
 });
