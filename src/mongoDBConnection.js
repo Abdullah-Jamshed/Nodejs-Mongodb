@@ -8,6 +8,7 @@ const createUser = require("./createUser");
 const { getUser, getUsers, getUserID } = require("./readUser");
 const { updateUser, updateUserID } = require("./updateUser");
 const { deleteUser, deleteUserID } = require("./deleteUser");
+const findUser = require("./operators");
 
 const app = express();
 app.use(express.json());
@@ -92,6 +93,14 @@ app.delete("/deleteUserID/:id", (req, res) => {
   const { id } = req.params;
   if (id) return deleteUserID(id, res);
   res.send("SomeThing Went Wrong");
+});
+
+// <<<<==== OPERATERS ====>>>>
+
+app.get("/findUser", async (req, res) => {
+  const data = await findUser();
+  if (data) return res.json(data);
+  res.send("Something Went Wrong");
 });
 
 app.get("*", (req, res) => {
