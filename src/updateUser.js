@@ -12,20 +12,28 @@ const updateUser = (name, findName, res) => {
   //     .catch((err) => {
   //       res.send("Something Went Wrong");
   //     });
+
   //  <<<<<===============>>>>>>
   // Update one only with same value
   // UserModel.updateOne({ name: findName }, { name })
   //   .then(() => res.send("User Update"))
   //   .catch((err) => res.send("Something Went Wrong"));
+
   //  <<<<<===============>>>>>>
   // Update all with the same value
   // UserModel.updateMany({ name: findName }, { name })
   //   .then(() => res.send("Users Update"))
   //   .catch((err) => res.send("Something Went Wrong"));
+
   //  <<<<<===============>>>>>>
   // Update one only with same value
-  UserModel.findOneAndUpdate({ name: findName }, { name }) // can match with any field But Update only Scema fields
-    .then(() => res.send("User Update A"))
+  // UserModel.findOneAndUpdate({ name: findName }, { name }) // can match with any field But Update only Schema fields
+  //   .then(() => res.send("User Update"))
+  //   .catch((err) => res.send("Something Went Wrong"));
+
+  //  <<<<<===============>>>>>>
+  UserModel.findOneAndUpdate({ name: findName }, { $inc: { age: 1 } })
+    .then(() => res.send("User Update"))
     .catch((err) => res.send("Something Went Wrong"));
 };
 
