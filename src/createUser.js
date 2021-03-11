@@ -11,5 +11,4 @@ const createUser = (name, res) => {
       res.send(message);
     });
 };
-
 module.exports = createUser;
