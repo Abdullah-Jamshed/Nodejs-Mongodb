@@ -43,3 +43,4 @@ const pagination = async (pageNum, res) => {
 
 module.exports = { findUser, pagination };
 
+console.log("Hello world");
