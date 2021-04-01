@@ -22,6 +22,7 @@ const { USER_ID, USER_PASSWORD } = process.env;
 
 mongoose.connect(`mongodb+srv://${USER_ID}:${USER_PASSWORD}@cluster0.ekurl.mongodb.net/database?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 mongoose.connection
@@ -99,8 +100,10 @@ app.delete("/deleteUserID/:id", (req, res) => {
 
 app.get("/findUser", async (req, res) => {
   const data = await findUser();
-  if (data) return res.json(data);
-  res.send("Something Went Wrong");
+
+  res.json(data);
+  // if (data) return res.json(data);
+  // res.send("Something Went Wrong");
 });
 
 app.get("/page/:no", async (req, res) => {
@@ -111,9 +114,6 @@ app.get("*", (req, res) => {
   res.status(404).send("<h1>404 ERROR PAGE NOT FOUND</h1>");
 });
 
-
 app.listen(app.get("port"), function () {
   console.log(`Express Started on: http://localhost:${app.get("port")}`);
 });
-
-

@@ -14,14 +14,18 @@ const findUser = async () => {
     // const data = await UserModel.find({ age: { $ne: 20, $exists: true } });
 
     //   <<<<============>>>>
-    const data = await UserModel.find({
-      $and: [{ $or: [{ age: 20 }, { age: 2 }] }, { $or: [{ name: "abdullah" }, { age: { $lt: 30 } }] }],
-    });
+
+    // const data = await UserModel.find({
+    //   $and: [{ $or: [{ age: 20 }, { age: 2 }] }, { $or: [{ name: "abdullah" }, { age: { $lt: 30 } }] }],
+    // });
 
     // This query will select all documents where: the age field value equals 20 or 2, and
     // the age field value is less than 30.
     // This query cannot be constructed using an implicit AND operation, because it uses the $or operator more than once.
-
+    console.log("users ===>>>");
+    // const data = await UserModel.find({});
+    // const data = await UserModel.distinct("age") // Array of ages in collections
+    const data = await UserModel.count({ age: 20 });
     return data;
   } catch {
     return false;
@@ -42,5 +46,3 @@ const pagination = async (pageNum, res) => {
 };
 
 module.exports = { findUser, pagination };
-
-console.log("Hello world");
