@@ -149,12 +149,23 @@ const findUser = async () => {
     // // <<<<<=====AGGREGATION PIPELINE======>>>>>
 
     //  // <<<<============>>>>
-    const data = await UserModel.aggregate([
-      { $match: { status: "A" } },
-      { $group: { _id: "$cust_id", total: { $sum: "$amount" } } },
-      // { $sort: { total: -1 } },
-    ]);
-    //  // return all documents that contain field age with type of number
+    // const data = await UserModel.aggregate([
+    //   { $match: { status: "A" } },
+    //   { $group: { _id: "$cust_id", total: { $sum: "$amount" } } },
+    //   { $sort: { total: -1 } },
+    // ]);
+
+    // // <<<<<=====   TEXT SEARCH  ======>>>>>
+
+    //  // <<<<============>>>>
+    // UserModel.createIndex({ name: "text", discription: "text" });
+    const data = await UserModel.find({ $text: { $search: "fahad" } });
+    // const data = await UserModel.find({ $text: { $search: "fahad" } }, { score: { $meta: "textScore" } }).sort({
+    //   score: { $meta: "textScore" },
+    // });
+
+    // more detail  https://docs.mongodb.com/manual/text-search/
+  
 
     // //  ==================   UPDATE  ==================
 
