@@ -159,13 +159,19 @@ const findUser = async () => {
 
     //  // <<<<============>>>>
     // UserModel.createIndex({ name: "text", discription: "text" });
-    const data = await UserModel.find({ $text: { $search: "fahad" } });
+    // const data = await UserModel.find({ $text: { $search: "fahad" } });
     // const data = await UserModel.find({ $text: { $search: "fahad" } }, { score: { $meta: "textScore" } }).sort({
     //   score: { $meta: "textScore" },
     // });
 
     // more detail  https://docs.mongodb.com/manual/text-search/
-  
+
+    // // <<<<<=====   REGEX  ======>>>>>
+
+    // const data = await UserModel.find({ name: /^ab/ });    // // start with ab
+    // const data = await UserModel.find({ name: /ah$/ });    // // end with ah
+    // const data = await UserModel.find({ name: /ah/ });     // // contain ah
+    // const data = await UserModel.find({ name: /d.*h/ });   // // 
 
     // //  ==================   UPDATE  ==================
 
