@@ -171,7 +171,7 @@ const findUser = async () => {
     // const data = await UserModel.find({ name: /^ab/ });    // // start with ab
     // const data = await UserModel.find({ name: /ah$/ });    // // end with ah
     // const data = await UserModel.find({ name: /ah/ });     // // contain ah
-    // const data = await UserModel.find({ name: /d.*h/ });   // // 
+    // const data = await UserModel.find({ name: /d.*h/ });   // //
 
     // //  ==================   UPDATE  ==================
 
@@ -180,6 +180,8 @@ const findUser = async () => {
     return null;
   }
 };
+
+const updateUser = async (pageNum, res) => {};
 
 const pagination = async (pageNum, res) => {
   var itemsPerPage = 4;
@@ -194,4 +196,4 @@ const pagination = async (pageNum, res) => {
   }
 };
 
-module.exports = { findUser, pagination };
+module.exports = { findUser, pagination, updateUser };
